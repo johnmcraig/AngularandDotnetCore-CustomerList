@@ -29,7 +29,11 @@ namespace CustomerApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<ICustomerRepository, CustomerRepository>(); // use AddScoped when going to production or have a larger test database
-
+            
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1", new ConsoleKeyInfo { Title = "My first API", Version = "v1"});
+            });
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -49,6 +53,12 @@ namespace CustomerApi
             AutoMapper.Mapper.Initialize(mapper => {
                 mapper.CreateMap<Customer, CustomerDto>().ReverseMap();
                 mapper.CreateMap<Customer, CustomerCreateDto>().ReverseMap();
+            });
+
+            // Swagger API testing setup and config
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My fisrt API");
             });
 
             app.UseHttpsRedirection();
