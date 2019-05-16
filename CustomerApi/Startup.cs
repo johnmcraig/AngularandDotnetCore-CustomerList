@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace CustomerApi
 {
@@ -31,7 +32,7 @@ namespace CustomerApi
             services.AddSingleton<ICustomerRepository, CustomerRepository>(); // use AddScoped when going to production or have a larger test database
             
             services.AddSwaggerGen(c => {
-                c.SwaggerDoc("v1", new ConsoleKeyInfo { Title = "My first API", Version = "v1"});
+                c.SwaggerDoc("v1", new Info { Title = "My first API", Version = "v1"});
             });
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
