@@ -63,11 +63,54 @@ namespace CustomerApi.Controllers
         }
 
         // PUT api/customer/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value) { }
+        [HttpPut]
+        [Route("{id:int}", Name = nameof(UpdateCustomer))]
+        public ActionResult<CustomerDto> UpdateCustomer(int id, [FromBody] CustomerUpdateDto updateCustomerDto)
+        { 
+            if (updateCustomerDto == null)
+            {
+                return BadRequest("Customer not found");
+            }
+
+            var customer = _repo.GetSingle(id);
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            Mapper.Map(updateCustomerDto, customer);
+
+            _repo.Update(id, customer);
+
+            if(!_repo.Save())
+            {
+                throw new Exception("Updating a Customer failed");
+            }
+
+            return Ok(Mapper.Map<CustomerDto>(customer));
+        }
 
         // DELETE api/customer/5
-        [HttpDelete("{id}")]
-        public void DeleteById(int id) { }
+        [HttpDelete]
+        [Route("{id:int}", Name = nameof(RemoveCustomer))]
+        public ActionResult RemoveCustomer(int id)
+        { 
+            Customer customer = _repo.GetSingle(id);
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            _repo.Delete(id);
+
+            if(!_repo.Save())
+            {
+                throw new Exception("Deleting a Customer failed");
+            }
+
+            return NoContent();
+        }
     }
 }
