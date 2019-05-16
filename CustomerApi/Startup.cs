@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CustomerApi.Data;
 using CustomerApi.Dtos;
 using CustomerApi.Models;
 using Microsoft.AspNetCore.Builder;
@@ -27,6 +28,8 @@ namespace CustomerApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<ICustomerRepository, CustomerRepository>(); // use AddScoped when going to production or have a larger test database
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
