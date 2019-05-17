@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Controllers.Controllers
 {
     [ApiVersion("2.0")]
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
     {

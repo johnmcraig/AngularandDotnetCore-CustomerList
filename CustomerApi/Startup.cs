@@ -33,7 +33,16 @@ namespace CustomerApi
         {
             services.AddSingleton<ICustomerRepository, CustomerRepository>(); // use AddScoped when going to production or have a larger test database
             
-            services.AddSwaggerGen(options => {
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddApiVersioning(config => {
+                    config.ReportApiVersions = true;
+                    config.AssumeDefaultVersionWhenUnspecified = true;
+                    config.DefaultApiVersion = new ApiVersion(1, 0);
+                    config.ApiVersionReader = new HeaderApiVersionReader("api-version");
+            }).AddVersionedApiExplorer(o => o.GroupNameFormat = "'v'VVV"); 
+
+              services.AddSwaggerGen(options => {
                 
                 var provider = services.BuildServiceProvider()
                     .GetRequiredService<IApiVersionDescriptionProvider>();
@@ -47,21 +56,11 @@ namespace CustomerApi
                         });
                     }
             });
-            
-            //services.AddMvcCore().AddVersionedApiExplorer(o => o.GroupNameFormat = "v'VVV'");
-            
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-            services.AddApiVersioning(config => {
-                    config.ReportApiVersions = true;
-                    config.AssumeDefaultVersionWhenUnspecified = true;
-                    config.DefaultApiVersion = new ApiVersion(1, 0);
-                    config.ApiVersionReader = new HeaderApiVersionReader("api-version");
-            }); 
         }
+        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApiVersionDescriptionProvider provider)
         {
             if (env.IsDevelopment())
             {
@@ -80,8 +79,13 @@ namespace CustomerApi
 
             // Swagger API testing setup and config
             app.UseSwagger();
-            app.UseSwaggerUI(c => {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My fisrt API");
+            app.UseSwaggerUI(options => {
+                foreach (var description in provider.ApiVersionDescriptions)
+                {
+                    options.SwaggerEndpoint(
+                        $"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+
+                }
             });
 
             app.UseHttpsRedirection();
