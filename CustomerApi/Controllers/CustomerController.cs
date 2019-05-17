@@ -10,7 +10,9 @@ using AutoMapper;
 
 namespace CustomerApi.Controllers
 {
+    [ApiVersion("1.0")]
     [Route("api/[controller]")]
+    [ApiController]
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerRepository _repo;
