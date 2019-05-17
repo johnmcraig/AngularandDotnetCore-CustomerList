@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -31,11 +33,31 @@ namespace CustomerApi
         {
             services.AddSingleton<ICustomerRepository, CustomerRepository>(); // use AddScoped when going to production or have a larger test database
             
-            services.AddSwaggerGen(c => {
-                c.SwaggerDoc("v1", new Info { Title = "My first API", Version = "v1"});
+            services.AddSwaggerGen(options => {
+                
+                var provider = services.BuildServiceProvider()
+                    .GetRequiredService<IApiVersionDescriptionProvider>();
+
+                    foreach (var description in provider.ApiVersionDescriptions)
+                    {
+                        options.SwaggerDoc(description.GroupName, new Info
+                        { 
+                            Title = $"Sample API {description.ApiVersion}", 
+                            Version = description.ApiVersion.ToString() 
+                        });
+                    }
             });
             
+            //services.AddMvcCore().AddVersionedApiExplorer(o => o.GroupNameFormat = "v'VVV'");
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddApiVersioning(config => {
+                    config.ReportApiVersions = true;
+                    config.AssumeDefaultVersionWhenUnspecified = true;
+                    config.DefaultApiVersion = new ApiVersion(1, 0);
+                    config.ApiVersionReader = new HeaderApiVersionReader("api-version");
+            }); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
