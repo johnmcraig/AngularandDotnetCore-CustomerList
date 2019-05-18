@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { CustomerModule } from './customer/presentational/customer/customer.module';
+import { CustomerModule } from './customer/customer.module';
 import { CustomersComponent } from './customer/container/customers/customers.component';
 import { CustomerListComponent } from './customer/presentational/customer-list/customer-list.component';
 
