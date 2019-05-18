@@ -91,7 +91,7 @@ namespace CustomerApi
             });
 
             app.UseCors(x => {
-                x.WithOrigins("https://localhost:5001")
+                x.WithOrigins("http://localhost:4200")
                 .AllowAnyHeader()
                 .AllowAnyMethod();
             });
