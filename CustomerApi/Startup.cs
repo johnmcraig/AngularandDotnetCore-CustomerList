@@ -35,12 +35,16 @@ namespace CustomerApi
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddMvcCore().AddApiExplorer();
+            
+            services.AddVersionedApiExplorer(options => options.GroupNameFormat = "'v'VVV" );
+
             services.AddApiVersioning(config => {
                     config.ReportApiVersions = true;
                     config.AssumeDefaultVersionWhenUnspecified = true;
                     config.DefaultApiVersion = new ApiVersion(1, 0);
                     config.ApiVersionReader = new HeaderApiVersionReader("api-version");
-            }).AddVersionedApiExplorer(o => o.GroupNameFormat = "'v'VVV"); 
+            });
 
             services.AddSwaggerGen(options => {
                 
