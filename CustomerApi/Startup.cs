@@ -42,7 +42,7 @@ namespace CustomerApi
                     config.ApiVersionReader = new HeaderApiVersionReader("api-version");
             }).AddVersionedApiExplorer(o => o.GroupNameFormat = "'v'VVV"); 
 
-              services.AddSwaggerGen(options => {
+            services.AddSwaggerGen(options => {
                 
                 var provider = services.BuildServiceProvider()
                     .GetRequiredService<IApiVersionDescriptionProvider>();
@@ -56,6 +56,8 @@ namespace CustomerApi
                         });
                     }
             });
+
+            services.AddCors();
         }
         
 
@@ -86,6 +88,12 @@ namespace CustomerApi
                         $"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
 
                 }
+            });
+
+            app.UseCors(x => {
+                x.WithOrigins("https://localhost:5001")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
             });
 
             app.UseHttpsRedirection();
