@@ -14,7 +14,7 @@ namespace Controllers.Controllers
         [HttpGet]
         public ActionResult Gets()
         {
-            return Ok("2.0");
+            return Ok("This is version 2.0 of the customer controller");
         }
     }
 }
