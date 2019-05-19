@@ -1,6 +1,6 @@
 export interface Customer {
     name: string;
     id: number;
-    postion: string;
+    position: string;
     age: string;
 }
