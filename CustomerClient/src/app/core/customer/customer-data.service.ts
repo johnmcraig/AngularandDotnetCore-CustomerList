@@ -7,7 +7,7 @@ import { Customer } from 'src/app/shared/models/customer.model';
   providedIn: 'root'
 })
 export class CustomerDataService {
-  private controllerEndpoint = `customers`;
+  private controllerEndpoint = `customer`;
 
   constructor(private readonly http: HttpClient) { }
 
