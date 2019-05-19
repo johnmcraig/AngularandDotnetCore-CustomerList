@@ -1,3 +1,4 @@
+using CustomerApi.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CustomerApi.Data
@@ -6,6 +7,9 @@ namespace CustomerApi.Data
     {
         public CustomerDbContext(DbContextOptions<CustomerDbContext> options) : base (options)
         {
+            Database.EnsureCreated();
         }
+
+        public DbSet<Customer> Customers { get; set; }
     }
 }
