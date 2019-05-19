@@ -14,7 +14,9 @@ import { CustomerListComponent } from './customer/presentational/customer-list/c
     CustomerListComponent
   ],
   imports: [
-    BrowserModule, CoreModule, CustomerModule
+    BrowserModule,
+    CoreModule,
+    CustomerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
