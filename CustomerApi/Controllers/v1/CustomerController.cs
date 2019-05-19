@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using CustomerApi.Models;
+using AutoMapper;
 using CustomerApi.Data;
 using CustomerApi.Dtos;
-using AutoMapper;
+using CustomerApi.Models;
+using Microsoft.AspNetCore.Mvc;
 
-namespace CustomerApi.Controllers
+namespace CustomerApi.Controllers.v1
 {
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
@@ -34,7 +33,7 @@ namespace CustomerApi.Controllers
         [HttpGet("{id:int}", Name = nameof(GetSingle))]
         public ActionResult GetSingle(int id)
         {
-            Customer customer = _repo.GetSingle(id);
+            var customer = _repo.GetSingle(id);
 
             return Ok(customer);
         }
@@ -48,7 +47,7 @@ namespace CustomerApi.Controllers
                 return BadRequest();
             }
 
-            Customer customerToAdd = Mapper.Map<Customer>(createDto);
+            var customerToAdd = Mapper.Map<Customer>(createDto);
 
             _repo.Add(customerToAdd);
 
@@ -57,7 +56,7 @@ namespace CustomerApi.Controllers
                 throw new Exception("Creating a Customer failed.");
             }
  
-            Customer newCustomer = _repo.GetSingle(customerToAdd.Id);
+            var newCustomer = _repo.GetSingle(customerToAdd.Id);
 
             return CreatedAtRoute(nameof(GetSingle), 
                 new { id = newCustomer.Id}, 
@@ -98,7 +97,7 @@ namespace CustomerApi.Controllers
         [Route("{id:int}", Name = nameof(RemoveCustomer))]
         public ActionResult RemoveCustomer(int id)
         { 
-            Customer customer = _repo.GetSingle(id);
+            var customer = _repo.GetSingle(id);
 
             if (customer == null)
             {

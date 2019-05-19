@@ -17,8 +17,7 @@ namespace CustomerApi.Data
 
         public Customer GetSingle(int id)
         {
-            Customer item;
-            return _storage.TryGetValue(id, out item) ? item : null;
+            return _storage.TryGetValue(id, out var item) ? item : null;
         }
 
         public void Add(Customer item)
@@ -33,9 +32,7 @@ namespace CustomerApi.Data
 
         public void Delete(int id)
         {
-            Customer item;
-
-            if(!_storage.TryRemove(id, out item))
+            if(!_storage.TryRemove(id, out var item))
             {
                 throw new Exception("Item could not be removed");
             }
