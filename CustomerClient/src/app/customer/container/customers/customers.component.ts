@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Customer } from 'src/app/shared/models/customer.model';
 import { CustomerDataService } from 'src/app/core/customer/customer-data.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-customers',
@@ -19,6 +20,6 @@ export class CustomersComponent implements OnInit {
 
   customerAdded(customerToAdd: Customer) {
     this.allCustomers$ = this.customerDataService.add(customerToAdd)
-    .pipe(() => this.customerDataService.getAll());
+    .pipe(switchMap(() => this.customerDataService.getAll()));
   }
 }
