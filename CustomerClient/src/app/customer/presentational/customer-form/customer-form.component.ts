@@ -1,5 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { EventEmitter } from 'protractor';
+import { EventEmitter } from 'events';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
