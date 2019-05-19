@@ -14,4 +14,8 @@ export class CustomerDataService {
   getAll() {
     return this.http.get<Customer[]>(`${environment.endpoint}${this.controllerEndpoint}`);
   }
+
+  add(toAdd: Customer) {
+    return this.http.post<Customer>(`${environment.endpoint}${this.controllerEndpoint}`, toAdd);
+  }
 }
