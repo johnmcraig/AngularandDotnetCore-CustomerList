@@ -17,4 +17,8 @@ export class CustomersComponent implements OnInit {
     this.allCustomers$ = this.customerDataService.getAll();
   }
 
+  customerAdded(customerToAdd: Customer) {
+    this.allCustomers$ = this.customerDataService.add(customerToAdd)
+    .pipe(() => this.customerDataService.getAll());
+  }
 }
