@@ -1,5 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { EventEmitter } from 'events';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -16,7 +15,7 @@ export class CustomerFormComponent implements OnInit {
   ngOnInit() {
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
-      postion: new FormControl('', Validators.required),
+      position: new FormControl('', Validators.required),
       age: new FormControl('', Validators.required)
     });
   }
@@ -25,5 +24,4 @@ export class CustomerFormComponent implements OnInit {
     const customerToAdd = this.form.value;
     this.customerAdded.emit(customerToAdd);
   }
-
 }
