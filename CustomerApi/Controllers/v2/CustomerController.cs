@@ -29,7 +29,7 @@ namespace CustomerApi.Controllers.v2
 
         }
 
-        [HttpGet]
+        [HttpGet(Name = nameof(GetAll))]
         public async Task<ActionResult<Customer>> GetAll()
         {
             var customers = await _dbContext.Customers.ToListAsync();
@@ -40,7 +40,7 @@ namespace CustomerApi.Controllers.v2
             return Ok(customers);
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id:int}", Name = nameof(GetSingle))]
         public async Task<ActionResult<Customer>> GetSingle(int id)
         {
             var customer = await _dbContext.Customers.FirstOrDefaultAsync(x => x.Id == id);
@@ -51,27 +51,21 @@ namespace CustomerApi.Controllers.v2
             return Ok(customer);
         }
 
-        [HttpPost]
+        [HttpPost(Name = nameof(AddCustomer))]
         public async Task<ActionResult<Customer>> AddCustomer([FromBody] Customer customer)
         {
-             await _dbContext.Customers.AddAsync(customer);
+             _dbContext.Customers.Add(customer);
              await _dbContext.SaveChangesAsync();
 
             if(customer == null)
                 return BadRequest("Customer could not be added");
 
-            return CreatedAtAction(nameof(GetSingle), 
-                new
-                { 
-                    id = customer.Id,
-                    name = customer.Name,
-                    position = customer.Position,
-                    age = customer.Age 
-                },
-                customer);
+            return CreatedAtRoute(nameof(GetSingle), 
+                new { id = customer.Id }, customer);
         }
 
-        [HttpPut("id")]
+        [HttpPut]
+        [Route("{id:int}", Name = nameof(UpdateCustomer))]
         public async Task<IActionResult> UpdateCustomer(int id, Customer customer)
         {
             if( id != customer.Id)
