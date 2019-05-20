@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -31,8 +32,13 @@ namespace CustomerApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ICustomerRepository, CustomerRepository>(); // use AddScoped when going to production or have a larger test database
+            // use AddScoped when going to production or have a larger test database
+            services.AddSingleton<ICustomerRepository, CustomerRepository>(); 
             
+            // change to prefered database options using inblock pattern once a scheme is decided
+            services.AddDbContext<CustomerDbContext>(options =>
+                options.UseInMemoryDatabase("Customers")); 
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddMvcCore().AddApiExplorer();
