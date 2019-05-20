@@ -13,12 +13,13 @@ namespace CustomerApi.Controllers.v2
     public class CustomerController : ControllerBase
     {
         private readonly CustomerDbContext _dbContext;
+        private readonly IGenericRepository _repo;
 
-        public CustomerController(CustomerDbContext dbContext)
+        public CustomerController(CustomerDbContext dbContext, IGenericRepository repo)
         {
             _dbContext = dbContext;
-
-            if(_dbContext.Customers.Count() == 0)
+            _repo = repo;
+            if (_dbContext.Customers.Count() == 0)
                 _dbContext.Add(new Customer
                 {
                     Name = "Bob", 
