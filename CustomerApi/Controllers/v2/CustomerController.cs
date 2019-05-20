@@ -13,12 +13,11 @@ namespace CustomerApi.Controllers.v2
     public class CustomerController : ControllerBase
     {
         private readonly CustomerDbContext _dbContext;
-        private readonly IGenericRepository _repo;
 
-        public CustomerController(CustomerDbContext dbContext, IGenericRepository repo)
+        public CustomerController(CustomerDbContext dbContext)
         {
             _dbContext = dbContext;
-            _repo = repo;
+            
             if (_dbContext.Customers.Count() == 0)
                 _dbContext.Add(new Customer
                 {
@@ -59,7 +58,7 @@ namespace CustomerApi.Controllers.v2
              await _dbContext.SaveChangesAsync();
 
             if(customer == null)
-                return BadRequest("Customer could not be added");
+                return BadRequest();
 
             return CreatedAtRoute(nameof(GetSingle), 
                 new { id = customer.Id }, customer);
@@ -78,7 +77,7 @@ namespace CustomerApi.Controllers.v2
             return NoContent();
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id:int}", Name = nameof(DeleteCustomer))]
         public async Task<IActionResult> DeleteCustomer(int id)
         {
             var customer = await _dbContext.Customers.FindAsync(id);
