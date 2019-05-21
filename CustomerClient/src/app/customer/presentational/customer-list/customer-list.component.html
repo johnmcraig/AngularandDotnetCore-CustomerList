@@ -1,6 +1,6 @@
 <div class="container">
-    <h2 class="text-center text-primary">Customers List</h2>
-    <hr>
+  <h2 class="text-center text-primary">Customers List</h2>
+  <hr />
   <div class="row">
     <ul *ngIf="allCustomers?.length > 0">
       <li *ngFor="let customer of allCustomers">
@@ -13,6 +13,6 @@
         >
       </li>
     </ul>
+    <div *ngIf="allCustomers?.length === 0">No Data available</div>
   </div>
-  <div *ngIf="allCustomers?.length === 0">No Data available</div>
 </div>
