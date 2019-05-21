@@ -1,9 +1,18 @@
-<h2>Customers List</h2>
-<ul *ngIf="allCustomers?.length > 0">
-  <li *ngFor="let customer of allCustomers">
-    {{ customer.name }} is {{ customer.age}} years old and is in the {{ customer.position }} postion. 
-    <a [routerLink]="['/details', customer.id]" routerLinkActive="router-link-active">Details</a>
-  </li>
-</ul>
-
-<div *ngIf="allCustomers?.length === 0">No Data available</div>
+<div class="container">
+    <h2 class="text-center text-primary">Customers List</h2>
+    <hr>
+  <div class="row">
+    <ul *ngIf="allCustomers?.length > 0">
+      <li *ngFor="let customer of allCustomers">
+        {{ customer.name }} is {{ customer.age }} years old and is in the
+        {{ customer.position }} postion.
+        <a
+          [routerLink]="['/details', customer.id]"
+          routerLinkActive="router-link-active"
+          >Details</a
+        >
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="allCustomers?.length === 0">No Data available</div>
+</div>

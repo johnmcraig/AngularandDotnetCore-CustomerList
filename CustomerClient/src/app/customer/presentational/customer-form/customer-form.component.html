@@ -1,13 +1,25 @@
-<form (ngSubmit)="addCustomer()" [formGroup]="form">
-  Name
-  <br>
-  <input type="text" formControlName="name">
-  <br>Position
-  <br>
-  <input type="text" formControlName="position">
-  <br>Age
-  <br>
-  <input type="text" formControlName="age">
-  <br>
-  <button [disabled]="form.invalid">Add Customer</button>
-</form>
+<div class="container content">
+  <form (ngSubmit)="addCustomer()" [formGroup]="form">
+      <h2 class="text-center text-primary">Add Customer Here</h2>
+      <hr>
+
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" class="form-control" formControlName="name" placeholder="Name"/>
+    </div>
+    
+    <div class="form-group">
+        <label>Position</label>
+        <input type="text" class="form-control" formControlName="position" placeholder="Position"/>
+    </div>
+    
+    <div class="form-group">
+        <label>Age</label>
+        <input type="text" class="form-control" formControlName="age" placeholder="Age"/>
+    </div>
+
+    <button class="btn btn-primary btn-md mr-2" [disabled]="form.invalid">
+      Add Customer
+    </button>
+  </form>
+</div>
