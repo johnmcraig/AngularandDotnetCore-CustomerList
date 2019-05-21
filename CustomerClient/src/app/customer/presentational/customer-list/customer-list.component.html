@@ -1,6 +1,9 @@
 <h2>Customers List</h2>
 <ul *ngIf="allCustomers?.length > 0">
   <li *ngFor="let customer of allCustomers">
-    {{ customer.name }} is {{ customer.age}} years old in the {{ customer.position }} position
+    {{ customer.name }} is {{ customer.age}} years old and is in the {{ customer.position }} postion. 
+    <a [routerLink]="['/details', customer.id]" routerLinkActive="router-link-active">Details</a>
   </li>
 </ul>
+
+<div *ngIf="allCustomers?.length === 0">No Data available</div>
