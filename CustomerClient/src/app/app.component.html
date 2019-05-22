@@ -1,17 +1,16 @@
 <body>
-  <app-navbar id="navbar"
-  class="navbar navbar-dark fixed-top bg-dark"></app-navbar>
+  <app-navbar
+    id="navbar"
+    class="navbar navbar-dark fixed-top bg-dark"
+  ></app-navbar>
   <div class="container">
-    <h2>Angular 7 and ASP.Net Core 2.2 Customer List Application</h2>
     <div class="row">
+      <h2>Angular 7 and ASP.Net Core 2.2 Customer List Application</h2>
       <p>Enter a customer name, their position, and age into the form below.</p>
-    </div>
-    <div class="row">
       <p>
         The customers' data should then be displayed as a list under the form.
       </p>
     </div>
+    <router-outlet></router-outlet>
   </div>
-
-  <router-outlet></router-outlet>
 </body>
