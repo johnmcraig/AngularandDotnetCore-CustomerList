@@ -1,4 +1,9 @@
 using System;
+using System.Linq;
+using System.Threading.Tasks;
+using CustomerApi.Controllers.v1;
+using CustomerApi.Data;
+using CustomerApi.Models;
 using Xunit;
 
 namespace CustomerApiTests
@@ -6,12 +11,12 @@ namespace CustomerApiTests
     public class CustomerControllerUnitTests
     {
         [Fact]
-        public async Task_Values_GetAll()
+        public async Task GetAll()
         {
             var controller = new CustomerController(new CustomerRepository());
 
             // Act
-            var result = await controller.Get();
+            var result = await controller.GetAll();
 
             // Assert
             var okResult = result.Should().BeOfType<OkObjectResult>().Subject;
@@ -21,7 +26,7 @@ namespace CustomerApiTests
         }
 
         [Fact]
-        public async Task_Get_Specific()
+        public async Task GetSpecific()
         {
 
         }

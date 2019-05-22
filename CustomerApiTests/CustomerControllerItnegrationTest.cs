@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Xunit;
 
 /// <summary>
 /// integration test class
@@ -6,7 +8,7 @@
 public class CustomerControllerIntegrationTest
 {
 	[Fact]
-	public async Task_GetAll()
+	public async Task GetAll()
 	{
 		//
 		// TODO: Add constructor logic here
