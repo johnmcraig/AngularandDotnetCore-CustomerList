@@ -1,5 +1,5 @@
 # Customer List
-> A web form demo using Angular 7 and ASP.Net Core 2.2 
+> A form demo using Angular 7 and ASP.Net Core 2.2 
 
 A testable API with a functional web form designed from the Angular CLI template. This application implements API versioning and testing endpoints with Swagger and Api Versioning 3.0.1 packages. An abstract data layer contains an in-memory database to store and fetch data.
 
