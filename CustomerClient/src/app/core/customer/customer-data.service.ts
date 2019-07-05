@@ -24,4 +24,12 @@ export class CustomerDataService {
   add(toAdd: Customer) {
     return this.http.post<Customer>(`${environment.endpoint}${this.controllerEndpoint}`, toAdd);
   }
+
+  update(id: number, toUpdate: Customer) {
+    return this.http.put<Customer>(`${environment.endpoint}${this.controllerEndpoint}/${id}`, toUpdate);
+  }
+
+  delete(id: number) {
+    return this.http.delete<Customer>(`${environment.endpoint}${this.controllerEndpoint}/${id}`);
+  }
 }
