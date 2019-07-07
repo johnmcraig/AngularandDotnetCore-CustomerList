@@ -22,7 +22,7 @@ namespace CustomerApi.Controllers.v1
 
         // GET api/customer
         [HttpGet(Name = nameof(GetAll))]
-        public ActionResult GetAll()
+        public IActionResult GetAll()
         {
             List<Customer> customers = _repo.GetAll().ToList();
 
@@ -31,9 +31,12 @@ namespace CustomerApi.Controllers.v1
 
         // GET api/customer/5
         [HttpGet("{id:int}", Name = nameof(GetSingle))]
-        public ActionResult GetSingle(int id)
+        public IActionResult GetSingle(int id)
         {
-            var customer = _repo.GetSingle(id);
+            Customer customer = _repo.GetSingle(id);
+
+            if (customer == null)
+                return NotFound();
 
             return Ok(customer);
         }
@@ -53,7 +56,7 @@ namespace CustomerApi.Controllers.v1
 
             if (!_repo.Save())
             {
-                throw new Exception("Creating a Customer failed.");
+                throw new Exception("Creating an item failed to save.");
             }
  
             var newCustomer = _repo.GetSingle(customerToAdd.Id);
@@ -66,38 +69,38 @@ namespace CustomerApi.Controllers.v1
         // PUT api/customer/5
         [HttpPut]
         [Route("{id:int}", Name = nameof(UpdateCustomer))]
-        public ActionResult<CustomerDto> UpdateCustomer(int id, [FromBody] CustomerUpdateDto updateCustomerDto)
+        public IActionResult UpdateCustomer(int id, [FromBody] CustomerUpdateDto updateCustomerDto)
         { 
             if (updateCustomerDto == null)
             {
-                return BadRequest("Customer not found");
+                return BadRequest();
             }
 
-            var customer = _repo.GetSingle(id);
+            var existingCustomer = _repo.GetSingle(id);
 
-            if (customer == null)
+            if (existingCustomer == null)
             {
                 return NotFound();
             }
 
-            Mapper.Map(updateCustomerDto, customer);
+            Mapper.Map(updateCustomerDto, existingCustomer);
 
-            _repo.Update(id, customer);
+            _repo.Update(id, existingCustomer);
 
             if(!_repo.Save())
             {
-                throw new Exception("Updating a Customer failed");
+                throw new Exception("Updating an item failed to save");
             }
 
-            return Ok(Mapper.Map<CustomerDto>(customer));
+            return Ok(Mapper.Map<CustomerDto>(existingCustomer));
         }
 
         // DELETE api/customer/5
         [HttpDelete]
         [Route("{id:int}", Name = nameof(RemoveCustomer))]
-        public ActionResult RemoveCustomer(int id)
+        public IActionResult RemoveCustomer(int id)
         { 
-            var customer = _repo.GetSingle(id);
+            Customer customer = _repo.GetSingle(id);
 
             if (customer == null)
             {
