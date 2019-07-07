@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace CustomerApi.Dtos
@@ -9,5 +10,6 @@ namespace CustomerApi.Dtos
         public string Name { get; set; }
         public string Position { get; set; }
         public int Age { get; set; }
+        public DateTime Created { get; set; }
     }
 }

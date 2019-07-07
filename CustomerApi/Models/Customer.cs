@@ -1,3 +1,5 @@
+using System;
+
 namespace CustomerApi.Models
 {
     public class Customer
@@ -6,5 +8,6 @@ namespace CustomerApi.Models
         public string Name { get; set; }
         public int Age { get; set; }
         public string Position { get; set; }
+        public DateTime Created {get; set;}
     }
 }

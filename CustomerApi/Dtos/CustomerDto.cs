@@ -1,4 +1,6 @@
 
+using System;
+
 namespace CustomerApi.Dtos
 {
     public class CustomerDto
@@ -7,5 +9,6 @@ namespace CustomerApi.Dtos
         public string Name { get; set; }
         public string Position { get; set; }
         public int Age { get; set; }
+        public DateTime Created { get; set;}
     }
 }
