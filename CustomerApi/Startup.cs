@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CustomerApi.Data;
 using CustomerApi.Dtos;
 using CustomerApi.Models;
+using CustomerApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,7 +34,8 @@ namespace CustomerApi
         public void ConfigureServices(IServiceCollection services)
         {
             // use AddScoped when going to production or have a larger test database
-            services.AddSingleton<ICustomerRepository, CustomerRepository>(); 
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddSingleton<IDataSeed, DataSeed>(); 
             
             // change to prefered database options using inblock pattern once a scheme is decided
             services.AddDbContext<CustomerDbContext>(options =>
@@ -61,7 +63,7 @@ namespace CustomerApi
                     {
                         options.SwaggerDoc(description.GroupName, new Info
                         { 
-                            Title = $"Sample API {description.ApiVersion}", 
+                            Title = $"Customer API {description.ApiVersion}", 
                             Version = description.ApiVersion.ToString() 
                         });
                     }
@@ -87,6 +89,7 @@ namespace CustomerApi
             AutoMapper.Mapper.Initialize(mapper => {
                 mapper.CreateMap<Customer, CustomerDto>().ReverseMap();
                 mapper.CreateMap<Customer, CustomerCreateDto>().ReverseMap();
+                mapper.CreateMap<Customer, CustomerUpdateDto>().ReverseMap();
             });
 
             // Swagger API testing setup and config
