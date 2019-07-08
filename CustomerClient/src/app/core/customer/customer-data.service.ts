@@ -15,7 +15,7 @@ export class CustomerDataService {
     return this.http.get<Customer[]>(`${environment.endpoint}${this.controllerEndpoint}`);
   }
 
-  getSignle(id: number) {
+  getSingle(id: number) {
     return this.http.get<Customer>(
       `${environment.endpoint}${this.controllerEndpoint}/${id}`
     );
