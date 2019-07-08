@@ -1,10 +1,10 @@
 <div *ngIf="customerDetails$ | async as customerDetail; else loading">
   <h3>Details for {{customerDetail.name}}</h3>
-  <ol>
-    <li>{{ customerDetail.name }}</li>
-    <li>{{ customerDetail.age }}</li>
-    <li>{{ customerDetail.position }}</li>
-  </ol>
+  <ul>
+    <li>Name: {{ customerDetail.name }}</li>
+    <li>Age: {{ customerDetail.age }}</li>
+    <li>Position: {{ customerDetail.position }}</li>
+  </ul>
 </div>
 
 <ng-template #loading>loading...</ng-template>
