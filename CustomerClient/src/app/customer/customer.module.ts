@@ -6,11 +6,29 @@ import { CustomerFormComponent } from './presentational/customer-form/customer-f
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomerDetailsComponent } from './presentational/customer-details/customer-details.component';
 import { RouterModule } from '@angular/router';
+import { CustomerListComponent } from './presentational/customer-list/customer-list.component';
+import { CustomerUpdateComponent } from './presentational/customer-update/customer-update.component';
+import { CustomerDeleteComponent } from './presentational/customer-delete/customer-delete.component';
 
 @NgModule({
-  declarations: [...allPresentationalComponents, ...allContainerComponents, CustomerFormComponent, CustomerDetailsComponent],
+  declarations: [
+  ...allPresentationalComponents,
+  ...allContainerComponents,
+  CustomerFormComponent,
+  CustomerDetailsComponent,
+  CustomerDeleteComponent,
+  CustomerUpdateComponent
+],
   imports: [
-    CommonModule, ReactiveFormsModule, RouterModule
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule.forChild([
+    { path: 'list', component: CustomerListComponent},
+    { path: 'details/:id', component: CustomerDetailsComponent },
+    { path: 'create', component: CustomerFormComponent},
+    { path: 'update/:id', component: CustomerUpdateComponent },
+    { path: 'delete/:id', component: CustomerDeleteComponent},
+    ])
   ],
   exports: [...allContainerComponents]
 })
