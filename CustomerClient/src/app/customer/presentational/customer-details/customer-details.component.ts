@@ -13,13 +13,24 @@ import { switchMap, map } from 'rxjs/operators';
 export class CustomerDetailsComponent implements OnInit {
   customerDetails$: Observable<Customer>;
 
+  public customer: Customer;
+
   constructor(private readonly route: ActivatedRoute,
               private readonly dataService: CustomerDataService) { }
 
   ngOnInit() {
     this.customerDetails$ = this.route.paramMap.pipe(map((params: ParamMap) => params.get('id')),
-    switchMap((id: string) => this.dataService.getSignle(+id))
+    switchMap((id: string) => this.dataService.getSingle(+id))
     );
   }
+
+  // getCustomerDetails() {
+  //   const id: string = this.route.snapshot.params.id;
+  //   const apiUrl = `customer/${id}`;
+
+  //   this.dataService.getSingle(apiUrl).subscribe(res => {
+  //     this.customer = res as Customer;
+  //   });
+  // }
 
 }
