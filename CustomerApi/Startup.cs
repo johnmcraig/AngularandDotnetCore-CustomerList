@@ -35,7 +35,7 @@ namespace CustomerApi
         {
             // use AddScoped when going to production or have a larger test database
             services.AddScoped<ICustomerRepository, CustomerRepository>();
-            services.AddSingleton<IDataSeed, DataSeed>(); 
+            services.AddTransient<CustomerSeeder>(); 
             
             // change to prefered database options using inblock pattern once a scheme is decided
             services.AddDbContext<CustomerDbContext>(options =>
@@ -74,7 +74,8 @@ namespace CustomerApi
         
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApiVersionDescriptionProvider provider)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, 
+                                IApiVersionDescriptionProvider provider, CustomerSeeder seedData)
         {
             if (env.IsDevelopment())
             {
@@ -99,7 +100,6 @@ namespace CustomerApi
                 {
                     options.SwaggerEndpoint(
                         $"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
-
                 }
             });
 
@@ -108,6 +108,8 @@ namespace CustomerApi
                 .AllowAnyHeader()
                 .AllowAnyMethod();
             });
+
+            seedData.Seed().Wait();
 
             app.UseHttpsRedirection();
             app.UseMvc();
