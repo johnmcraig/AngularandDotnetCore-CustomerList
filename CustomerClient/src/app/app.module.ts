@@ -6,19 +6,23 @@ import { CoreModule } from './core/core.module';
 import { CustomerModule } from './customer/customer.module';
 import { AppRoutingModule } from './app-route.module';
 import { NavbarComponent } from './navbar/navbar.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent
-  ],
-  imports: [
-    BrowserModule,
-    CoreModule,
-    CustomerModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+   declarations: [
+      AppComponent,
+      NavbarComponent,
+      HomeComponent
+   ],
+   imports: [
+      BrowserModule,
+      CoreModule,
+      CustomerModule,
+      AppRoutingModule
+   ],
+   providers: [],
+   bootstrap: [
+      AppComponent
+   ]
 })
 export class AppModule { }
