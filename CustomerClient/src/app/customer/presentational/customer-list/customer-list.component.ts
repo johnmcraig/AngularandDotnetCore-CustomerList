@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Customer } from 'src/app/shared/models/customer.model';
+import { CustomerDataService } from 'src/app/core/customer/customer-data.service';
 
 @Component({
   selector: 'app-customer-list',
@@ -8,6 +9,8 @@ import { Customer } from 'src/app/shared/models/customer.model';
 })
 export class CustomerListComponent implements OnInit {
   @Input() allCustomers: Customer[] = [];
+
+  public customers: Customer[];
 
   constructor() { }
 
