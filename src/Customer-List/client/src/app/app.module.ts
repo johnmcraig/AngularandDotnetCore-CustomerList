@@ -6,7 +6,7 @@ import { CoreModule } from './core/core.module';
 import { CustomerModule } from './customer/customer.module';
 import { AppRoutingModule } from './app-route.module';
 import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './Home/Home.component';
 
 @NgModule({
    declarations: [

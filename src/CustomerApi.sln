@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerApi", "CustomerApi.csproj", "{DC6D02CB-8A52-4687-9358-37C62285EE2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "server", "CustomerApi.csproj", "{DC6D02CB-8A52-4687-9358-37C62285EE2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerApiTests", "CustomerApiTests\CustomerApiTests.csproj", "{A0F9F78C-D4EE-4DE0-84AF-7B01981192AA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tests", "tests\CustomerApiTests.csproj", "{A0F9F78C-D4EE-4DE0-84AF-7B01981192AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerApi", "CustomerApi\CustomerApi.csproj", "{211C53ED-1EB3-4530-9714-DBF800AE05BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "server", "server\CustomerApi.csproj", "{211C53ED-1EB3-4530-9714-DBF800AE05BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
