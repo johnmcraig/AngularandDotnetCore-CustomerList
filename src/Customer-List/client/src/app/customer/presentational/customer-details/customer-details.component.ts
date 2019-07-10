@@ -24,13 +24,4 @@ export class CustomerDetailsComponent implements OnInit {
     );
   }
 
-  // getCustomerDetails() {
-  //   const id: string = this.route.snapshot.params.id;
-  //   const apiUrl = `customer/${id}`;
-
-  //   this.dataService.getSingle(apiUrl).subscribe(res => {
-  //     this.customer = res as Customer;
-  //   });
-  // }
-
 }
