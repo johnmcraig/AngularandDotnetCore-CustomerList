@@ -17,7 +17,8 @@ import { CustomerDeleteComponent } from './presentational/customer-delete/custom
   CustomerFormComponent,
   CustomerDetailsComponent,
   CustomerDeleteComponent,
-  CustomerUpdateComponent
+  CustomerUpdateComponent,
+  CustomerListComponent
 ],
   imports: [
     CommonModule,
