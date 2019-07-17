@@ -1,5 +1,5 @@
 # Customer List
-> A form demo using Angular 7 and ASP.Net Core 2.2 
+> A demo using Angular 8 and ASP.Net Core 2.2 
 
 A testable API with a functional web form designed from the Angular CLI template. This application implements API versioning and testing endpoints with Swagger and Api Versioning 3.0.1 packages. An abstract data layer contains an in-memory database to store and fetch data.
 
@@ -8,7 +8,7 @@ You will need the following in order to use this project for development:
 - Node.js v8 or greater.
 - ASP.Net Core 2.2 with the [.Net Core SDK](https://dotnet.microsoft.com/download).
 - A text editor or IDE, such as [VS Code](https://code.visualstudio.com/).
-- Angular 7: use `npm install @anular/cli` to isntall the latest version.
+- Angular 8: use `npm install @anular/cli` to isntall the latest version.
 - An Operating System with an integrated terminal or command prompt.
 
 ## Project Scope
