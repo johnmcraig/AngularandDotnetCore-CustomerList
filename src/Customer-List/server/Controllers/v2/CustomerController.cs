@@ -17,16 +17,6 @@ namespace CustomerApi.Controllers.v2
         public CustomerController(CustomerDbContext dbContext)
         {
             _dbContext = dbContext;
-            
-            if (_dbContext.Customers.Count() == 0)
-                _dbContext.Add(new Customer
-                {
-                    Name = "Bob", 
-                    Age = 40, 
-                    Position = "Sales Manager"
-                });
-                _dbContext.SaveChanges();
-
         }
 
         [HttpGet(Name = nameof(GetAll))]
@@ -34,8 +24,7 @@ namespace CustomerApi.Controllers.v2
         {
             var customers = await _dbContext.Customers.ToListAsync();
             
-            if(customers == null)
-                return NotFound();
+            if(customers == null) return NotFound();
 
             return Ok(customers);
         }
@@ -45,8 +34,7 @@ namespace CustomerApi.Controllers.v2
         {
             var customer = await _dbContext.Customers.FirstOrDefaultAsync(x => x.Id == id);
 
-            if( customer == null)
-                return NotFound();
+            if( customer == null) return NotFound();
 
             return Ok(customer);
         }
@@ -57,8 +45,7 @@ namespace CustomerApi.Controllers.v2
              _dbContext.Customers.Add(customer);
              await _dbContext.SaveChangesAsync();
 
-            if(customer == null)
-                return BadRequest();
+            if(customer == null) return BadRequest();
 
             return CreatedAtRoute(nameof(GetSingle), 
                 new { id = customer.Id }, customer);
@@ -68,8 +55,7 @@ namespace CustomerApi.Controllers.v2
         [Route("{id:int}", Name = nameof(UpdateCustomer))]
         public async Task<IActionResult> UpdateCustomer(int id, Customer customer)
         {
-            if( id != customer.Id)
-                return BadRequest();
+            if( id != customer.Id) return BadRequest();
 
             _dbContext.Entry(customer).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
@@ -82,8 +68,7 @@ namespace CustomerApi.Controllers.v2
         {
             var customer = await _dbContext.Customers.FindAsync(id);
 
-            if( customer == null)
-                return NotFound();
+            if( customer == null) return NotFound();
 
             _dbContext.Customers.Remove(customer);
             await _dbContext.SaveChangesAsync();
