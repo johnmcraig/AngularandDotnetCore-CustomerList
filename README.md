@@ -26,7 +26,7 @@ Fianlly, a few test classes can be located in the CustomerTests directory. These
 ## Setup
 Download and extract the file or clone the repo. Then install the dependencies within the project directory via:
  ```sh
- $ git clone https://github.com/.../AngularandDotnetCore-CustomerList
+ $ git clone https://github.com/johnmcraig/customer-list
  $ cd AngularAndDotNetCore-CustomerList
 ```
 Change into the client folder (Amgular front-end files) and isntall node packages:
