@@ -36,7 +36,9 @@ namespace CustomerApi.Controllers.v1
             Customer customer = _repo.GetSingle(id);
 
             if (customer == null)
+            {
                 return NotFound();
+            }
 
             return Ok(customer);
         }
