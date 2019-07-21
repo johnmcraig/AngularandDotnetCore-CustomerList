@@ -32,7 +32,8 @@ namespace CustomerApi.Data
             var customers = new List<Customer>()
             {
                 new Customer() { Name = "Phil Collins", Age = 45, Position = "Sales Manager", Created = DateTime.Now },
-                new Customer() { Name = "Tony Banks", Age = 39, Position = "Consultant", Created = DateTime.Now }
+                new Customer() { Name = "Tony Banks", Age = 39, Position = "Consultant", Created = DateTime.Now },
+                new Customer() { Name = "Bob Lumburg", Age = 40, Position = "IT Manager", Created = DateTime.Now }
             };
 
             _dbContext.Customers.AddRange(customers);
