@@ -1,7 +1,7 @@
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CustomerApi.Controllers.v1
+namespace CustomerApi.Controllers
 {
     public class Fallback : Controller
     {
